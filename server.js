@@ -47,19 +47,13 @@ app.post("/login", (req, res) => {
 
 /* GENERATE EMAIL (PROTECTED) */
 app.post("/generate", authenticateToken, async (req, res) => {
-  const {
-    name,
-    company,
-    painPoint,
-    senderName,
-    senderPhone,
-    senderCompany
-  } = req.body;
+  const { name, company, painPoint, levers, senderName, senderPhone, senderCompany } = req.body;
 
   const emailContent = await generateEmail(
     name,
     company,
     painPoint,
+    levers,
     senderName,
     senderPhone,
     senderCompany

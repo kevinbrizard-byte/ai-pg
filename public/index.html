@@ -2,56 +2,50 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>AI-PG | Connexion</title>
+  <title>AI-PG</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
+<div class="layout">
 
-  <div id="loginCard" class="card">
-    <h2>Connexion</h2>
+  <!-- LEFT COLUMN -->
+  <div class="left-panel">
 
-    <input type="email" id="loginEmail" placeholder="Adresse mail">
-    <input type="password" id="loginPassword" placeholder="Mot de passe">
+    <div class="card">
+      <h2>Informations prospect</h2>
 
-    <button onclick="login()">Se connecter</button>
+      <input type="text" id="name" placeholder="Nom du prospect">
+      <input type="text" id="company" placeholder="Entreprise">
 
-    <p class="switch">
-      Vous n'avez pas encore de compte AI-PG ?
-      <span onclick="showRegister()">Créer un compte</span>
-    </p>
+      <h3>Signature (optionnel)</h3>
+      <input type="text" id="senderName" placeholder="Votre nom">
+      <input type="text" id="senderCompany" placeholder="Votre entreprise">
+      <input type="text" id="senderPhone" placeholder="Votre téléphone">
+
+      <button onclick="generate()">Générer</button>
+    </div>
+
   </div>
 
-  <div id="registerCard" class="card hidden">
-    <h2>Créer un compte</h2>
+  <!-- RIGHT COLUMN -->
+  <div class="right-panel">
 
-    <input type="email" id="registerEmail" placeholder="Adresse mail">
-    <input type="password" id="registerPassword" placeholder="Mot de passe">
+    <div class="result-card">
+      <h2>Email généré</h2>
+      <pre id="result">Votre email apparaîtra ici...</pre>
+    </div>
 
-    <button onclick="register()">Créer le compte</button>
+    <div class="card problem-card">
+      <h3>Problématique principale</h3>
+      <input type="text" id="painPoint" placeholder="Décrivez la problématique principale">
 
-    <p class="switch">
-      Déjà un compte ?
-      <span onclick="showLogin()">Se connecter</span>
-    </p>
-  </div>
+      <h3>Leviers potentiels (optionnel)</h3>
+      <div id="levers-container"></div>
 
-  <div id="appCard" class="card hidden">
-    <h2>Générer un email</h2>
+      <button class="secondary" onclick="addLever()">+ Ajouter un levier</button>
+    </div>
 
-    <input type="text" id="name" placeholder="Nom du prospect">
-    <input type="text" id="company" placeholder="Entreprise">
-    <input type="text" id="painPoint" placeholder="Problématique">
-
-    <h3>Signature (optionnel)</h3>
-    <input type="text" id="senderName" placeholder="Votre nom">
-    <input type="text" id="senderCompany" placeholder="Votre entreprise">
-    <input type="text" id="senderPhone" placeholder="Votre téléphone">
-
-    <button onclick="generate()">Générer</button>
-
-    <pre id="result"></pre>
   </div>
 
 </div>

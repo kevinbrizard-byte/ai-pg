@@ -52,10 +52,16 @@ async function login() {
 }
 
 async function generate() {
+  const leverInputs = document.querySelectorAll(".lever-input");
+  const levers = Array.from(leverInputs)
+    .map(input => input.value)
+    .filter(value => value.trim() !== "");
+
   const payload = {
     name: document.getElementById("name").value,
     company: document.getElementById("company").value,
     painPoint: document.getElementById("painPoint").value,
+    levers: levers,
     senderName: document.getElementById("senderName").value,
     senderCompany: document.getElementById("senderCompany").value,
     senderPhone: document.getElementById("senderPhone").value
@@ -79,4 +85,13 @@ async function generate() {
   } else {
     document.getElementById("result").textContent = data.error || "Erreur";
   }
+}
+
+function addLever() {
+  const container = document.getElementById("levers-container");
+  const input = document.createElement("input");
+  input.type = "text";
+  input.placeholder = "Levier potentiel supplémentaire";
+  input.className = "lever-input";
+  container.appendChild(input);
 }

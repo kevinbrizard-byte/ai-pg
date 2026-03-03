@@ -2,32 +2,47 @@ body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   background: #2b2d31;
+  color: white;
+}
+
+.layout {
   display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
 }
 
-.container {
-  width: 100%;
-  max-width: 400px;
+.left-panel {
+  width: 30%;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.right-panel {
+  width: 70%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .card {
   background: #313338;
-  padding: 30px;
+  padding: 25px;
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-  color: white;
+  margin-bottom: 30px;
 }
 
-.hidden {
-  display: none;
+.result-card {
+  background: #1e1f22;
+  padding: 30px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  min-height: 250px;
 }
 
-h2 {
+h2, h3 {
   margin-top: 0;
-  text-align: center;
 }
 
 input {
@@ -61,23 +76,16 @@ button:hover {
   background: #4752c4;
 }
 
-.switch {
-  font-size: 13px;
-  text-align: center;
+button.secondary {
+  background: #40444b;
   margin-top: 10px;
-  color: #b5bac1;
 }
 
-.switch span {
-  color: #5865f2;
-  cursor: pointer;
+button.secondary:hover {
+  background: #4f545c;
 }
 
 pre {
-  background: #1e1f22;
-  padding: 15px;
-  border-radius: 10px;
-  margin-top: 20px;
   white-space: pre-wrap;
-  font-size: 13px;
+  font-size: 14px;
 }
