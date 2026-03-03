@@ -1,27 +1,35 @@
-const sqlite3 = require("sqlite3").verbose();
-const path = require("path");
+const { Pool } = require("pg");
 
-const db = new sqlite3.Database(path.join(__dirname, "database.sqlite"));
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
+});
 
-db.serialize(() => {
-  db.run(`
+async function init() {
+  await pool.query(`
     CREATE TABLE IF NOT EXISTS users (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      email TEXT UNIQUE,
-      password TEXT
-    )
+      id SERIAL PRIMARY KEY,
+      email TEXT UNIQUE NOT NULL,
+      password TEXT NOT NULL,
+      credits_remaining INTEGER DEFAULT 5,
+      plan_type TEXT DEFAULT 'free',
+      last_reset DATE DEFAULT CURRENT_DATE,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
   `);
 
-  db.run(`
+  await pool.query(`
     CREATE TABLE IF NOT EXISTS logs (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      user_id INTEGER,
+      id SERIAL PRIMARY KEY,
+      user_id INTEGER REFERENCES users(id),
       prospect_name TEXT,
       company TEXT,
       pain_point TEXT,
-      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    )
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
   `);
-});
+}
 
-module.exports = db;
+init();
+
+module.exports = pool;
