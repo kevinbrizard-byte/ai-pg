@@ -72,6 +72,31 @@ app.post("/login", async (req, res) => {
   }
 });
 
+/* GET CURRENT USER INFO */
+app.get("/me", authenticateToken, async (req, res) => {
+  try {
+    const result = await db.query(
+      "SELECT email, plan_type, credits_remaining FROM users WHERE id = $1",
+      [req.user.id]
+    );
+
+    const user = result.rows[0];
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json({
+      email: user.email,
+      plan_type: user.plan_type,
+      credits_remaining: user.credits_remaining
+    });
+
+  } catch (err) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 /* GENERATE EMAIL */
 app.post("/generate", authenticateToken, async (req, res) => {
   try {

@@ -89,3 +89,17 @@ pre {
   white-space: pre-wrap;
   font-size: 14px;
 }
+
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.credits-box {
+  background: #5865f2;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 14px;
+}
